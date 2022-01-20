@@ -7,6 +7,7 @@ function getRandomHexColor() {
   bodyDocument.style.backgroundColor = randomColor;
 }
 
+buttonStop.disabled = true;
 buttonStart.addEventListener('click', event => {
   timerId = setInterval(() => {
     getRandomHexColor();
@@ -14,10 +15,6 @@ buttonStart.addEventListener('click', event => {
   buttonStart.disabled = true;
   buttonStop.disabled = false;
 });
-
-if (!buttonStart.disabled) {
-  buttonStop.disabled = true;
-}
 
 buttonStop.addEventListener('click', event => {
   clearInterval(timerId);
