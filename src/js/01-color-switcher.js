@@ -11,16 +11,16 @@ buttonStart.addEventListener('click', event => {
   timerId = setInterval(() => {
     getRandomHexColor();
   }, 1000);
-  buttonStart.disabled = true; 
-  buttonStop.disabled = false; 
+  buttonStart.disabled = true;
+  buttonStop.disabled = false;
 });
 
 if (!buttonStart.disabled) {
-    buttonStop.disabled = true;
+  buttonStop.disabled = true;
 }
 
 buttonStop.addEventListener('click', event => {
-    clearInterval(timerId);
-  buttonStart.disabled = false; 
-  buttonStop.disabled = true; 
+  clearInterval(timerId);
+  buttonStart.disabled = false;
+  buttonStop.disabled = true;
 });
