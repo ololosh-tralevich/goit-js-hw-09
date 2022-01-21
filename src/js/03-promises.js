@@ -14,32 +14,31 @@ function createPromise(position, delay) {
 
     if (shouldResolve) {
       // Fulfill
-      resolve({ position, delay });
+      return resolve({ position, delay });
     } else {
       // Reject
-      reject({ position, delay });
-      return
+     return reject({ position, delay });
     }
   });
 
   promise.then(({ position, delay }) => {
     Notiflix.Notify.success(`✅ ПЕРЕМОГА promise ${position} in ${delay}ms`);
-  });
-  promise.catch(({ position, delay }) => {
+  })
+  .catch(({ position, delay }) => {
     Notiflix.Notify.failure(`❌ ЗРАДА promise ${position} in ${delay}ms`);
   });
 }
 
 form.addEventListener('submit', event => {
   event.preventDefault();
-
   setTimeout(() => {
-    timerId = setInterval(() => {
+    const timerId = setInterval(() => {
       position = position + 1;
       createPromise(position, Number(stepDelay.value));
-
+      
       if (position === Number(amount.value)) {
         clearInterval(timerId);
+        position = 0;
       }
       console.log(position);
     }, Number(stepDelay.value));
