@@ -28,11 +28,6 @@ const options = {
     }
     startButton.disabled = false;
 
-    function getRandomHexColor() {
-      let randomColor = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
-      body.style.backgroundColor = randomColor;
-    }
-
     startButton.addEventListener('click', event => {
       startButton.disabled = true;
       inputData.disabled = true;
