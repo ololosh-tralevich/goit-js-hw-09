@@ -2,45 +2,40 @@ import Notiflix from 'notiflix';
 
 const form = document.querySelector('form.form');
 
-const amount = form.elements.amount;
-const firstDelay = form.elements.delay;
-const stepDelay = form.elements.step;
+form.addEventListener('submit', event => {
+  event.preventDefault();
+  let delay = Number(form.elements.delay.value);
+  const step = Number(form.elements.step.value);
+  const amount = Number(form.elements.amount.value);
 
-let position = 0;
+  for (let position = 1; position <= amount; position += 1) {
+    createPromise(position, delay);
+    delay += step;
+  }
+});
+
+// - - - - - - - - - - - - - - -
 
 function createPromise(position, delay) {
   const promise = new Promise((resolve, reject) => {
     const shouldResolve = Math.random() > 0.3;
 
-    if (shouldResolve) {
-      // Fulfill
-      return resolve({ position, delay });
-    } else {
-      // Reject
-     return reject({ position, delay });
-    }
-  });
-
-  promise.then(({ position, delay }) => {
-    Notiflix.Notify.success(`✅ ПЕРЕМОГА promise ${position} in ${delay}ms`);
-  })
-  .catch(({ position, delay }) => {
-    Notiflix.Notify.failure(`❌ ЗРАДА promise ${position} in ${delay}ms`);
-  });
-}
-
-form.addEventListener('submit', event => {
-  event.preventDefault();
-  setTimeout(() => {
-    const timerId = setInterval(() => {
-      position = position + 1;
-      createPromise(position, Number(stepDelay.value));
-      
-      if (position === Number(amount.value)) {
-        clearInterval(timerId);
-        position = 0;
+    setTimeout(() => {
+      if (shouldResolve) {
+        // Fulfill
+        return resolve({ position, delay });
+      } else {
+        // Reject
+        return reject({ position, delay });
       }
-      console.log(position);
-    }, Number(stepDelay.value));
-  }, Number(firstDelay.value));
-});
+    }, delay);
+  });
+
+  promise
+    .then(({ position, delay }) => {
+      Notiflix.Notify.success(`✅ ПЕРЕМОГА promise ${position} in ${delay}ms`);
+    })
+    .catch(({ position, delay }) => {
+      Notiflix.Notify.failure(`❌ ЗРАДА promise ${position} in ${delay}ms`);
+    });
+}
