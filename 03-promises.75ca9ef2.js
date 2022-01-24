@@ -5,4 +5,4 @@ var t,e=arguments[3];!function(e,i){"function"==typeof t&&t.amd?t([],function(){
 },{}],"GyVV":[function(require,module,exports) {
 "use strict";var e=t(require("notiflix"));function t(e){return e&&e.__esModule?e:{default:e}}const n=document.querySelector("form.form"),o=n.elements.amount,l=n.elements.delay,r=n.elements.step;let s=0;function u(t,n){new Promise((e,o)=>{return Math.random()>.3?e({position:t,delay:n}):o({position:t,delay:n})}).then(({position:t,delay:n})=>{e.default.Notify.success(`✅ ПЕРЕМОГА promise ${t} in ${n}ms`)}).catch(({position:t,delay:n})=>{e.default.Notify.failure(`❌ ЗРАДА promise ${t} in ${n}ms`)})}n.addEventListener("submit",e=>{e.preventDefault(),setTimeout(()=>{const e=setInterval(()=>{u(s+=1,Number(r.value)),s===Number(o.value)&&(clearInterval(e),s=0),console.log(s)},Number(r.value))},Number(l.value))});
 },{"notiflix":"hWOm"}]},{},["GyVV"], null)
-//# sourceMappingURL=/parcel-project-template/03-promises.75ca9ef2.js.map
+//# sourceMappingURL=/goit-js-hw-09/03-promises.75ca9ef2.js.map
